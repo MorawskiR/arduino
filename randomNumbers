@@ -1,0 +1,37 @@
+# arduino
+
+int incomingByte = 0;   // for incoming serial data
+#define LED3 3
+#define LED4 4
+#define LED5 5
+#define LED6 6
+int r = 0 ;
+void setup() {
+        Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
+        randomSeed(analogRead(0));
+}
+
+void loop() {
+
+    Serial.println("losowanie 3  -7");
+      r = random(3,7);
+      Serial.println(r);
+    switch (r) {
+      case 4:
+          digitalWrite(LED3,HIGH);
+          break;
+      case 5:
+          digitalWrite(LED4,HIGH);
+          break;
+      case 6:
+          digitalWrite(LED5,HIGH);
+          break;
+      case 7:
+          digitalWrite(LED6,HIGH);
+          break;
+      default :
+          break;
+    }
+      delay(1000);
+}
+ 
