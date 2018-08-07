@@ -1,37 +1,57 @@
-# arduino
+int odczytanaWartosc = 0;
+#define LED 4
+#define LED1 5
+#define LED2 6
+#define LED3 7
+ int r;
 
-int incomingByte = 0;   // for incoming serial data
-#define LED3 3
-#define LED4 4
-#define LED5 5
-#define LED6 6
-int r = 0 ;
 void setup() {
-        Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
-        randomSeed(analogRead(0));
+ randomSeed(analogRead(0));
+ Serial.begin(9600);//Uruchomienie komunikacji przez USART
+ pinMode(LED,OUTPUT);
+ pinMode(LED1,OUTPUT);
+ pinMode(LED2,OUTPUT);
+ pinMode(LED3,OUTPUT);
 }
-
+ 
 void loop() {
 
-    Serial.println("losowanie 3  -7");
-      r = random(3,7);
-      Serial.println(r);
-    switch (r) {
+  r = random(4, 8);
+ 
+         switch (r) {
       case 4:
-          digitalWrite(LED3,HIGH);
+          digitalWrite(LED,HIGH);
+          Serial.print("Zapalono diode nr : ");
+     Serial.println(r);
           break;
       case 5:
-          digitalWrite(LED4,HIGH);
+          digitalWrite(LED1,HIGH);
+          Serial.print("Zapalono diode nr : ");
+     Serial.println(r);
           break;
       case 6:
-          digitalWrite(LED5,HIGH);
+          digitalWrite(LED2,HIGH);
+          Serial.print("Zapalono diode nr : ");
+     Serial.println(r);
           break;
       case 7:
-          digitalWrite(LED6,HIGH);
+          digitalWrite(LED3,HIGH);
+          Serial.print("Zapalono diode nr : ");
+     Serial.println(r);
           break;
       default :
           break;
-    }
-      delay(1000);
 }
- 
+   delay(10000);
+   Serial.print("Zgaszono diode: ");
+    Serial.println(r);
+  digitalWrite(LED,LOW);
+  digitalWrite(LED1,LOW);
+  digitalWrite(LED2,LOW);
+  digitalWrite(LED3,LOW);
+}
+
+
+
+
+
