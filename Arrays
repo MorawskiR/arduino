@@ -1,0 +1,29 @@
+
+
+void setup() {
+  Serial.begin(9600);
+  randomSeed(analogRead(0));
+}
+ int array[5];
+void loop() 
+{
+  int i;
+  Serial.println();
+  for(i = 0; i < 5  ; i++)
+    {
+      array[i] = random(10);
+    }
+  for(i = 0; i<5;i++)
+    {
+      Serial.print("array[");
+      Serial.print(i);
+      Serial.print("]=");
+      Serial.println(array[i]);
+    }
+  delay(5000);
+}
+
+
+
+
+
