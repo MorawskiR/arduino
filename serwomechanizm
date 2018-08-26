@@ -1,0 +1,24 @@
+#include <Servo.h>
+
+Servo moje_servo;
+int potencjometr = A0;
+int wartosc;
+int pos = 0 ;
+
+void setup() {
+moje_servo.attach(11);
+}
+
+
+void loop() {
+for (pos = 0; pos < 180; pos +=1)
+{
+  moje_servo.write(pos);
+  delay(15);
+}
+for(pos = 180; pos >=1; pos -=1)
+{
+  moje_servo.write(pos);
+  delay(15);
+}
+}
