@@ -1,0 +1,18 @@
+#include <Servo.h>
+
+Servo moje_servo;
+int potencjometr = A0;
+int wartosc;
+
+
+void setup() {
+moje_servo.attach(11);
+}
+
+
+void loop() {
+wartosc = analogRead(potencjometr);
+wartosc = map(wartosc, 0, 1023, 0, 180);
+moje_servo.write(wartosc);
+delay(15);
+}
