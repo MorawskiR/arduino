@@ -1,0 +1,82 @@
+
+
+#include <Keypad.h>
+
+const byte ROWS = 4;
+const byte COLS = 3; 
+
+byte rowPINS[ROWS] = {9 , 8 ,7 ,6};
+byte colPINS[COLS] = {5, 4, 3};
+
+char keys[ROWS][COLS]  {
+  {'1', '2', '3'},
+  {'4', '5', '6'},
+  {'7', '8', '9'},
+  {'*', '0', '#'}
+};
+  char kod[4] ={'1', '2', '3', '4'}; 
+  char attempt[4] = {'0','0','0','0'};
+  int z;
+  int zz;
+
+
+Keypad keypad = Keypad( makeKeymap(keys), rowPINS, colPINS, ROWS, COLS);
+
+void setup(){
+  Serial.begin(9600);
+}
+void correctPIN() {
+  Serial.println("poprawny kod");
+}
+void incorrectPIN() {
+  Serial.println("złykod");
+}
+void checkPIN()
+{
+  int correct = 0; 
+  int i = 0 ;
+  for (i = 0; i < 4; i++)
+  {
+    if (attempt[i] == kod[i])
+    {
+      correct++;
+    }
+  }
+  if(correct == 4)
+  {
+    correctPIN();
+  }
+  else
+  {
+    incorrectPIN();
+  }
+  for (zz =0; zz<4 ; zz++)
+  {
+    attempt[zz] = 0;
+  }
+}
+
+void readKeypad()
+{
+char key = keypad.getKey();
+Serial.print(key);
+  if (key != NO_KEY)
+  {
+    switch(key)
+    {
+      case '*':
+        z=0;
+        break;
+      case '#':
+        delay(100);
+        checkPIN();
+        break;
+      default:
+      attempt[z]=key;
+      z++; 
+    }
+  }
+}
+void loop() {
+readKeypad();
+}
