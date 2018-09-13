@@ -1,0 +1,40 @@
+float voltage = 0 ; 
+float sensor = 0 ; 
+float currentC = 0; 
+int angle =  0;
+float celcius = 0;
+
+#include <Servo.h>
+Servo myservo;
+
+void setup()
+{
+  Serial.begin(9600);
+  myservo.attach(9);
+    Serial.begin(9600); //Ustawienie prędkości transmisji
+  Serial.println("Witaj na Forbocie!"); //Jednorazowe wysłanie tekstu
+}
+void find()
+{
+  float voltage = 0; 
+  float sensor = 0; 
+  //Serial.print(analogRead(0));
+  sensor = analogRead(0);
+  voltage = sensor * 5;
+  voltage = voltage / 1024;
+  
+celcius = (voltage - 0.5) * 100;
+
+}
+void display()
+{
+  Serial.print("temp: " );
+  Serial.print(celcius, 2);
+
+}
+void loop()
+{
+  find();
+  display();
+  delay(1000);
+}
