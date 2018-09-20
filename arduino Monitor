@@ -1,0 +1,26 @@
+// wczytywanie wartosci z monitora 600-2400
+#include <Servo.h>
+
+Servo myservo;
+int pos = 0;
+String inString = "";
+
+void setup(){
+  Serial.begin(9600);
+  myservo.attach(9);
+}
+
+void loop()
+{
+  while(Serial.available() > 0)
+  {
+    int inChar = Serial.read();
+    if(isDigit(inChar)) {
+      inString +=(char)inChar;
+    }
+    if (inChar =='\n') {
+      myservo.writeMicroseconds(inString.toInt());
+      inString = "";
+    }
+  }
+}
