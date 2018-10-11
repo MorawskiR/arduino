@@ -1,0 +1,36 @@
+
+
+#include <Servo.h>
+
+Servo myservo;  // create servo object to control a servo
+char  wartosc;
+int potpin = 0;  // analog pin used to connect the potentiometer
+int val;    // variable to read the value from the analog pin
+int k = 0;
+void setup() 
+{
+Serial.begin(9600);
+Serial.print("Kolejno odlicz!");
+myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+}
+
+
+void loop() 
+{
+
+if (Serial.available() > 0) 
+  {
+    wartosc = Serial.read();
+  //  Serial.print(wartosc);
+   if(wartosc == '1')
+    {
+      Serial.println("dasda");
+    }
+   if(wartosc=='2')
+   {
+      Serial.println("pedal 2");
+   }
+  }
+   
+
+  }
