@@ -1,0 +1,92 @@
+#include <Servo.h>
+char wartosc;
+Servo myservo1;  
+Servo myservo2;  
+Servo myservo3;  
+Servo myservo4; 
+Servo myservo5; 
+int pos = 0;
+String inString = "";
+
+void setup(){
+Serial.begin(9600);
+Serial.println("hm");
+myservo1.attach(3); 
+myservo2.attach(6); 
+myservo3.attach(9); 
+myservo4.attach(11); 
+myservo5.attach(5); 
+//default
+ myservo3.writeMicroseconds(1500);
+ myservo4.writeMicroseconds(1500);
+ myservo2.writeMicroseconds(2400);
+ myservo1.writeMicroseconds(640);
+  myservo5.writeMicroseconds(2500);
+ void neutral();
+}
+void neutral()
+ {
+ myservo2.writeMicroseconds(2400);
+ delay(1000);
+ myservo1.writeMicroseconds(650);
+ delay(1000);
+ myservo3.writeMicroseconds(1500);
+ delay(1000);
+ myservo4.writeMicroseconds(1500);
+ delay(1000);
+
+ Serial.println("done");
+ }
+void loop(){
+if (Serial.available() > 0)  
+  {
+    wartosc = Serial.read();
+  //  Serial.print(wartosc);
+  //przewija
+   if(wartosc == '1')
+    { 
+    myservo5.writeMicroseconds(2500);
+    delay(1000);
+    myservo4.writeMicroseconds(600); // gorne serwo
+    Serial.print("jestem  w 1");
+    myservo3.writeMicroseconds(2400);
+    delay(1000);
+    myservo2.writeMicroseconds(1000);
+    delay(1000);
+    myservo1.writeMicroseconds(1600);
+    delay(1000);
+    myservo4.writeMicroseconds(24001);
+    delay(1000);
+    myservo5.writeMicroseconds(550);
+    delay(1000);
+    myservo3.writeMicroseconds(1200);
+    delay(1000);
+    neutral();
+ 
+   
+
+    }
+       if(wartosc == '2')
+    {
+     myservo5.writeMicroseconds(650);
+     delay(1000);
+     myservo4.writeMicroseconds(2300);
+     delay(1000);
+     Serial.print("jestem  w 2");
+     myservo3.writeMicroseconds(750);
+     delay(1000);
+     myservo2.writeMicroseconds(1000);
+     delay(1000);
+     myservo1.writeMicroseconds(1200);
+     delay(1000);
+     myservo4.writeMicroseconds(600);
+     delay(1000);
+     myservo5.writeMicroseconds(2500);
+     delay(1000);
+     myservo3.writeMicroseconds(1200);
+     delay(1000);
+    neutral();
+  }
+
+}
+}
