@@ -1,0 +1,19 @@
+void setup() {
+  pinMode(4, INPUT_PULLUP); //Przycisk jako wejście
+  pinMode(7, INPUT_PULLUP); //Przycisk jako wejście
+
+}
+ 
+void loop()
+{
+  if (digitalRead(4) == LOW) { //Jeśli przycisk wciśnięty
+    digitalWrite(3, HIGH); //Włącz diodę
+    delay(100); //Czekamy 10 sekund
+    digitalWrite(3, LOW); //Wyłączamy diodę
+  }
+    if (digitalRead(7) == LOW) { //Jeśli przycisk wciśnięty
+    digitalWrite(2, HIGH); //Włącz diodę
+    delay(100); //Czekamy 10 sekund
+    digitalWrite(2, LOW); //Wyłączamy diodę
+  }
+}
