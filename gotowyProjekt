@@ -1,0 +1,80 @@
+#include <Servo.h> // dodanie biblioteki do obsługi serwomechanizmu
+    // deklaracje obiektów obsługujących poszczególne serwomechanizmy
+Servo myservo1;  
+Servo myservo2;  
+Servo myservo3;  
+Servo myservo4; 
+Servo myservo5; 
+
+void setup(){
+   // pinMode(8, OUTPUT); //Dioda jako wyjście
+   // pinMode(3, OUTPUT); //Dioda jako wyjście
+pinMode(7, INPUT_PULLUP); //Przycisk jako wejście
+pinMode(2, INPUT_PULLUP); //Przycisk jako wejście
+// Deklaracja pinów do obsługi serw
+myservo1.attach(3); 
+myservo2.attach(6); 
+myservo3.attach(9); 
+myservo4.attach(11); 
+myservo5.attach(5); 
+// ustawienie domyslnych pozycji dla silników 
+ myservo3.writeMicroseconds(1500);
+ myservo4.writeMicroseconds(1500);
+ myservo2.writeMicroseconds(2400);
+ myservo1.writeMicroseconds(640);
+  myservo5.writeMicroseconds(2500);
+ void neutral(); // prototyp funkcji ustawiająca silniki w domyślnej  pozycji
+}
+void neutral()// ciało funkcji 
+ {
+ myservo2.writeMicroseconds(2400);
+ delay(1000);
+ myservo1.writeMicroseconds(650);
+ delay(1000);
+ myservo3.writeMicroseconds(1500);
+ delay(1000);
+ myservo4.writeMicroseconds(1500);
+ delay(1000);
+ }
+void loop(){
+
+    if (digitalRead(7) == LOW) {
+    myservo5.writeMicroseconds(2500);
+    delay(1000);
+    myservo4.writeMicroseconds(600); // gorne serwo
+    delay(1000);
+    myservo3.writeMicroseconds(2370);
+    delay(1000);
+    myservo2.writeMicroseconds(1000);
+    delay(1000);
+    myservo1.writeMicroseconds(1600);
+    delay(1000);
+    myservo4.writeMicroseconds(24001);
+    delay(1000);
+    myservo5.writeMicroseconds(550);
+    delay(1000);
+    myservo3.writeMicroseconds(1200);
+    delay(500);
+    neutral();
+    }
+   if (digitalRead(2) == LOW) {
+     myservo5.writeMicroseconds(650);
+     delay(1000);
+     myservo4.writeMicroseconds(2300);
+     delay(1000);
+     Serial.print("jestem  w 2");
+     myservo3.writeMicroseconds(700);
+     delay(1000);
+     myservo2.writeMicroseconds(1000);
+     delay(1000);
+     myservo1.writeMicroseconds(1200);
+     delay(1000);
+     myservo4.writeMicroseconds(600);
+     delay(1000);
+       myservo5.writeMicroseconds(2500);
+     delay(1000);
+     myservo3.writeMicroseconds(1200);
+     delay(500);
+    neutral();
+  }
+}
