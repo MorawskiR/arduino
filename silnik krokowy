@@ -1,5 +1,5 @@
 #include <Stepper.h>
-
+char wartosc;
 #define P1 8
 #define P2 9 
 #define P3 10 
@@ -11,17 +11,9 @@ void setup() {
   pinMode (P4, OUTPUT); 
   void motor_CW (int dly ) ;
   void motor_CCW (int dly ) ;
+  Serial.begin(9600);
   } 
-  void loop() {
-    for( int i=0; i< 500; i++)
-    { 
-      motor_CW ( 2 ); 
-      } 
-    for( int i=0; i< 500; i++)
-    { motor_CCW ( 2 );
-  } 
-}
-void motor_CW (int dly ) 
+  void motor_CW (int dly ) 
 { digitalWrite (P1, HIGH); 
 delay(dly); 
 digitalWrite (P1, LOW); 
@@ -50,3 +42,28 @@ void motor_CCW (int dly )
   delay(dly);
   digitalWrite (P1, LOW); 
 }
+  void loop() {
+    if(Serial.available() > 0)  
+  {
+    wartosc = Serial.read();
+  //  
+  //przewija
+   if(wartosc == '1')
+{ 
+    for( int i=0; i< 500; i++)
+    { 
+      motor_CW ( 2 ); 
+      } 
+      Serial.print("jeden");
+      delay(1000);
+}
+ if(wartosc == '2')
+{
+    for( int i=0; i< 500; i++)
+    { motor_CCW ( 2 );
+  } 
+  Serial.print("dwa");
+  delay(1000);
+}
+}
+  }
