@@ -1,0 +1,139 @@
+#include <Servo.h> // dodanie biblioteki do obsługi serwomechanizmu
+    // deklaracje obiektów obsługujących poszczególne serwomechanizmy
+#include <Stepper.h>
+
+# define P1 8
+# define P2 9
+# define P3 10
+# define P4 11
+Servo myservo1;  
+Servo myservo2;  
+Servo myservo3;  
+Servo myservo4; 
+//Servo myservo5; 
+void motor_CW (int dly ) ;
+  void motor_CCW (int dly ) ;
+void motor_CW (int dly)
+{
+digitalWrite (P1, HIGH);
+delay (dly);
+digitalWrite (P1, LOW);
+digitalWrite (P2, HIGH);
+delay (dly);
+digitalWrite (P2, LOW);
+digitalWrite (P3, HIGH);
+delay (dly);
+digitalWrite (P3, LOW);
+digitalWrite (P4, HIGH);
+delay (dly);
+digitalWrite (P4, LOW);
+
+}
+
+void motor_CCW (int dly)
+{
+digitalWrite (P4, HIGH);
+delay (dly);
+digitalWrite (P4, LOW);
+digitalWrite (P3, HIGH);
+delay (dly);
+digitalWrite (P3, LOW);
+digitalWrite (P2, HIGH);
+delay (dly);
+digitalWrite (P2, LOW);
+digitalWrite (P1, HIGH);
+delay (dly);
+digitalWrite (P1, LOW);
+}
+
+void setup(){
+  pinMode (P1, OUTPUT );
+pinMode (P2, OUTPUT );
+pinMode (P3, OUTPUT );
+pinMode (P4, OUTPUT );
+
+pinMode(7, INPUT_PULLUP); //Przycisk jako wejście
+pinMode(2, INPUT_PULLUP); //Przycisk jako wejście
+// Deklaracja pinów do obsługi serw
+myservo1.attach(3); 
+myservo2.attach(6); 
+myservo3.attach(12); 
+myservo4.attach(4); 
+//myservo5.attach(5); 
+// ustawienie domyslnych pozycji dla silników 
+ myservo3.writeMicroseconds(1500);
+ myservo4.writeMicroseconds(1500);
+ myservo2.writeMicroseconds(2400);
+ myservo1.writeMicroseconds(640);
+ // myservo5.writeMicroseconds(2500);
+ void neutral(); // prototyp funkcji ustawiająca silniki w domyślnej  pozycji
+}
+void neutral()// ciało funkcji 
+ {
+ myservo2.writeMicroseconds(2400);
+ delay(1000);
+ myservo1.writeMicroseconds(650);
+ delay(1000);
+ myservo3.writeMicroseconds(1500);
+ delay(1000);
+ myservo4.writeMicroseconds(1500);
+ delay(1000);
+ }
+void loop(){
+
+    if (digitalRead(7) == LOW) {
+   // myservo5.writeMicroseconds(2500);
+   for(int i=0; i <500; i++)
+  {
+    motor_CCW (2);
+  }
+    delay(1000);
+    myservo4.writeMicroseconds(600); // gorne serwo
+    delay(1000);
+    myservo3.writeMicroseconds(2370);
+    delay(1000);
+    myservo2.writeMicroseconds(1000);
+    delay(1000);
+    myservo1.writeMicroseconds(1600);
+    delay(1000);
+    myservo4.writeMicroseconds(2400);
+    delay(1000);
+   // myservo5.writeMicroseconds(550);
+   for(int i=0; i<500; i++)
+    {
+    motor_CW (2);
+    }
+    delay(1000);
+    myservo3.writeMicroseconds(1200);
+    delay(500);
+    neutral();
+    }
+   if (digitalRead(2) == LOW) {
+       for(int i=0; i<500; i++)
+    {
+    motor_CW (2);
+    }
+     //myservo5.writeMicroseconds(650);
+     delay(1000);
+     myservo4.writeMicroseconds(2300);
+     delay(1000);
+     Serial.print("jestem  w 2");
+     myservo3.writeMicroseconds(650);
+     delay(1000);
+     myservo2.writeMicroseconds(1000);
+     delay(1000);
+     myservo1.writeMicroseconds(1200);
+     delay(1000);
+     myservo4.writeMicroseconds(600);
+     delay(1000);
+      ///\ myservo5.writeMicroseconds(2500);
+         for(int i=0; i <500; i++)
+  {
+    motor_CCW (2);
+  }
+     delay(1000);
+     myservo3.writeMicroseconds(2000);
+     delay(500);
+    neutral();
+  }
+}
